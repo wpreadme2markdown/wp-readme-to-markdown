@@ -5,6 +5,7 @@
  * @author Benjamin J. Balter -- http://ben.balter.com
  * @version 1.0
  */
+ 
 //no file, serve form
 if ( !$_FILES ) { include 'form.html'; exit(); }
 
@@ -19,7 +20,7 @@ $readme = preg_replace( "|^==([^=]+)=*?\s*?\n|im",  '##$1##'."\n",    $readme );
 $readme = preg_replace( "|^===([^=]+)=*?\s*?\n|im", '#$1#'."\n",   $readme );
 
 //parse contributors, donate link, etc.
-$readme = preg_replace( "|^([^:\n]+): (.+)$|im", "**$1:** $2  ", $readme );
+$readme = preg_replace( "|^([^:\n#]+): (.+)$|im", "**$1:** $2  ", $readme );
 
 //guess plugin slug from plugin name
 //@todo better way to do this?
