@@ -1,7 +1,15 @@
 Convert WordPress Plugin Readme Files to GitHub Flavored Markdown
 ==================================================================
 
-**Usage:**
+Features
+--------
+
+* Converts headings
+* Formats contributors, donate link, etc.
+* Inserts screenshots
+
+Usage
+-----
 
 1. Open in browser
 2. Select `readme.txt` file from your plugin
