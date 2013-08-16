@@ -37,7 +37,7 @@ if ( preg_match( "|## Screenshots ##(.*?)## [a-z]+ ##|ism", $readme, $matches ) 
 	//@todo assumes .png, perhaps should check that file exists first?
 	$i = 1;
 	foreach ( $screenshots as $screenshot ) {
-		$readme = str_replace( $screenshot[0], "###{$i}. {$screenshot[1]}###\n![{$screenshot[1]}](http://s.wordpress.org/extend/plugins/{$plugin}/screenshot-{$i}.png)\n", $readme );
+		$readme = str_replace( $screenshot[0], "###{$i}. {$screenshot[1]}###\n![{$screenshot[1]}](http://s.wordpress.org/plugins/{$plugin}/screenshot-{$i}.png)\n", $readme );
 		$i++;
 	}
 
