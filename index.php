@@ -20,7 +20,19 @@ $readme = preg_replace( "|^==([^=]+)=*?\s*?\n|im",  '##$1##'."\n",    $readme );
 $readme = preg_replace( "|^===([^=]+)=*?\s*?\n|im", '#$1#'."\n",   $readme );
 
 //parse contributors, donate link, etc.
-$readme = preg_replace( "|^([^:\n#]+): (.+)$|im", "**$1:** $2  ", $readme );
+$labels = array(
+	'Contributors',
+	'Donate link',
+	'Tags',
+	'Requires at least',
+	'Tested up to',
+	'Stable tag',
+	'License',
+	'License URI',
+);
+foreach ( $labels as $label ) {
+	$readme = preg_replace( "|^($label): (.+)$|im", "**$1:** $2  ", $readme );
+}
 
 //guess plugin slug from plugin name
 //@todo better way to do this?
