@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?php
 /**
  * Converts WordPress-flavored markup from standard readme.txt files
