@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 /**
  * Converts WordPress-flavored markup from standard readme.txt files
@@ -5,19 +6,27 @@
  * @author Benjamin J. Balter -- http://ben.balter.com
  * @version 1.0
  */
- 
-//no file, serve form
-if ( !$_FILES ) { include 'form.html'; exit(); }
 
-//grab file contents from temp location, no need to move
-$readme = file_get_contents( $_FILES['file']['tmp_name'] );
+//* If we have a CLI argument we assume its the file
+if ( ! empty( $argv[1] ) ) {
+	$cli = true;
+	$readme = file_get_contents( $argv[1] );
+}
+else {
+	//no file, serve form
+	if ( ! $_FILES ) {
+		include 'form.html'; exit();
+	}
+	//grab file contents from temp location, no need to move
+	$readme = file_get_contents( $_FILES['file']['tmp_name'] );
+}
 
 //Convert Headings
 //original code from https://github.com/markjaquith/WordPress-Plugin-Readme-Parser/blob/master/parse-readme.php
 //using here in reverse to go from WP to GitHub style headings
-$readme = preg_replace( "|^=([^=]+)=*?\s*?\n|im",  '###$1###'."\n",    $readme );
-$readme = preg_replace( "|^==([^=]+)=*?\s*?\n|im",  '##$1##'."\n",    $readme );
-$readme = preg_replace( "|^===([^=]+)=*?\s*?\n|im", '#$1#'."\n",   $readme );
+$readme = preg_replace( "|^=([^=]+)=*?\s*?\n|im", '###$1###'."\n", $readme );
+$readme = preg_replace( "|^==([^=]+)=*?\s*?\n|im", '##$1##'."\n", $readme );
+$readme = preg_replace( "|^===([^=]+)=*?\s*?\n|im", '#$1#'."\n", $readme );
 
 //parse contributors, donate link, etc.
 $labels = array(
@@ -57,6 +66,11 @@ if ( preg_match( "|## Screenshots ##(.*?)## [a-z]+ ##|ism", $readme, $matches ) 
 		$i++;
 	}
 
+}
+
+if ( $cli ) {
+	file_put_contents( 'readme.md', $readme);
+	exit;
 }
 
 header('Content-disposition: attachment; filename=readme.md');
