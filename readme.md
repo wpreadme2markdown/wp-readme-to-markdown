@@ -21,13 +21,14 @@ Command line
 
 ### Installation
 
-This requires you to have the cli version of php installed. Save the raw file index.php file from github as 'wp-readme-to-markdown' inside a folder in your PATH and make it executable.
+This requires you to have the cli version of php installed. Save the raw file index.php file from github as 'wp-readme-to-markdown' inside a folder in your PATH and make it executable. Finally add `#!/usr/bin/php` to the first line to make to make the system automatically execute this script with php.
 
 On Ubuntu and friends this can be done fast with this commands 
 ```
 sudo apt-get install php5-cli
 sudo wget https://raw.githubusercontent.com/benbalter/WP-Readme-to-Github-Markdown/master/index.php -O /usr/local/bin/wp-readme-to-markdown
 sudo chmod a+x /usr/local/bin/wp-readme-to-markdown
+sudo sed -i '1i#!/usr/bin/php' /usr/local/bin/wp-readme-to-markdown
 ```
 
 ### Command line Usage
