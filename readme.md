@@ -15,6 +15,27 @@ Usage
 2. Select `readme.txt` file from your plugin
 3. Browser will return you `readme.md` to place in your plugin's directory
 
+
+Command line
+------------
+
+### Installation
+
+This requires you to have the cli version of php installed. Save the raw file index.php file from github as 'wp-readme-to-markdown' inside a folder in your PATH and make it executable.
+
+On Ubuntu and friends this can be done fast with this commands 
+```
+sudo apt-get install php5-cli
+sudo wget https://raw.githubusercontent.com/benbalter/WP-Readme-to-Github-Markdown/master/index.php -O /usr/local/bin/wp-readme-to-markdown
+sudo chmod a+x /usr/local/bin/wp-readme-to-markdown
+```
+
+### Command line Usage
+
+There is just one argument and this is the input file. The output file is hardcoded to `readme.md`
+
+`wp-readme-to-markdown readme.txt` or `wp-readme-to-markdown README.txt`
+
 Online
 ------
 
