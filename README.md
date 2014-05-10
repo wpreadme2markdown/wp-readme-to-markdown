@@ -1,4 +1,6 @@
-# Convert WordPress Plugin Readme Files to GitHub Flavored Markdown
+# WP2MD
+
+Convert WordPress Plugin Readme Files to GitHub Flavored Markdown
 
 ## Features
 
@@ -22,7 +24,9 @@ PHP:
 $markdown = \SunChaser\WP2MD\Converter::Convert($readme);
 ```
 
-### Installation
+## Installation
+
+### Composer (recommended)
 
 Add a composer dependency to your project:
 
@@ -32,6 +36,9 @@ Add a composer dependency to your project:
 
 The binary will be ```vendor/bin/wp2md```
 
-Or install globally
+### Download binary
 
-    php composer.phar global require sunchaser/wp2md *
+You may install WP2MD binary globally
+
+    sudo wget http://code.sunchaser.info/wp2md/downloads/wp2md.phar /usr/local/bin/wp2md
+    sudo chmod a+x /usr/local/bin/wp2md
