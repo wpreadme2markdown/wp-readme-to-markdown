@@ -1,7 +1,7 @@
 <?php
 /**
  * Converts WordPress-flavored markup from standard readme.txt files
- * to Github-flavored markup for a readme.md file
+ * to Github-flavored markup for a README.md file
  * @author Benjamin J. Balter -- http://ben.balter.com
  * @version 1.0
  */
@@ -31,7 +31,7 @@ class Converter
             'License URI',
         );
         foreach ($labels as $label) {
-            $readme = preg_replace("|^($label): (.+)$|im", "**$1:** $2  ", $readme);
+            $readme = preg_replace("|^($label): (.+)$|im", '**$1:** $2  ', $readme);
         }
 
         //guess plugin slug from plugin name
@@ -40,7 +40,7 @@ class Converter
         $plugin = str_replace(' ', '-', strtolower(trim($matches[1])));
 
         //process screenshots, if any
-        if (preg_match("|## Screenshots ##(.*?)## [a-z]+ ##|ism", $readme, $matches)) {
+        if (preg_match('|## Screenshots ##(.*?)## [a-z]+ ##|ism', $readme, $matches)) {
 
             //parse screenshot list into array
             preg_match_all('|^[0-9]+\. (.*)$|im', $matches[1], $screenshots, PREG_SET_ORDER);
@@ -120,25 +120,25 @@ class Converter
     {
         $url_parts = @parse_url($link);
 
-        if (empty($url_parts["host"])) {
+        if (empty($url_parts['host'])) {
             return false;
         }
-        $host = $url_parts["host"];
+        $host = $url_parts['host'];
 
-        if (!empty($url_parts["path"])) {
-            $documentpath = $url_parts["path"];
+        if (!empty($url_parts['path'])) {
+            $documentpath = $url_parts['path'];
         } else {
-            $documentpath = "/";
+            $documentpath = '/';
         }
 
-        if (!empty($url_parts["query"])) {
-            $documentpath .= "?" . $url_parts["query"];
+        if (!empty($url_parts['query'])) {
+            $documentpath .= '?' . $url_parts['query'];
         }
 
-        if (!empty($url_parts["port"])) {
-            $port = $url_parts["port"];
+        if (!empty($url_parts['port'])) {
+            $port = $url_parts['port'];
         } else {
-            $port = "80";
+            $port = '80';
         }
 
         $socket = @fsockopen($host, $port, $errno, $errstr, 30);
@@ -149,7 +149,7 @@ class Converter
             fwrite($socket, "HEAD " . $documentpath . " HTTP/1.0\r\nHost: $host\r\n\r\n");
             $http_response = fgets($socket, 22);
 
-            if (preg_match("/200 OK/", $http_response, $regs)) {
+            if (preg_match('/200 OK/', $http_response, $regs)) {
                 fclose($socket);
                 return true;
             } else {
