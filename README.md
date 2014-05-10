@@ -10,7 +10,11 @@
 
 CLI:
 
+    # with files as params
     wp2md convert -i readme.txt -o README.md
+    # or with unix pipes
+    wp2md convert < readme.txt > README.md
+
 
 PHP:
 
