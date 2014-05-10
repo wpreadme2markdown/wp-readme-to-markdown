@@ -116,7 +116,7 @@ class Converter
      * @return   boolean
      * @link http://www.php.net/manual/en/function.fsockopen.php#39948
      */
-    function validateUrl($link)
+    private static function validateUrl($link)
     {
         $url_parts = @parse_url($link);
 
