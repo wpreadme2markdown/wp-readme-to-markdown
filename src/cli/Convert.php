@@ -20,9 +20,6 @@ class Convert extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var \Symfony\Component\Console\Helper\FormatterHelper $formatter */
-        //$formatter = $this->getHelperSet()->get('formatter');
-
         $readme = $input->getOption('input');
         if ($readme === null) {
             $readme = 'php://stdin';
