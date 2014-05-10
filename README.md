@@ -10,7 +10,7 @@
 
 CLI:
 
-    wp2md convert -i readme.txt -t README.txt
+    wp2md convert -i readme.txt -o README.md
 
 PHP:
 
