@@ -28,6 +28,7 @@ class Convert extends Command
             $readme = 'php://stdin';
         } elseif (is_file($readme) === false || is_readable($readme) === false) {
             $output->writeln('<error>You should specify the readme file</error>');
+            die();
         }
 
         $readmeData = file_get_contents($readme);
