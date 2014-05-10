@@ -10,7 +10,7 @@ namespace SunChaser\WP2MD;
 
 class Converter
 {
-    public static function Convert($readme)
+    public static function convert($readme)
     {
         //Convert Headings
         //original code from https://github.com/markjaquith/WordPress-Plugin-Readme-Parser/blob/master/parse-readme.php

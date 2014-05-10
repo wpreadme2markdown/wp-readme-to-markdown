@@ -30,7 +30,7 @@ class Convert extends Command
 
         $readmeData = file_get_contents($readme);
 
-        $markdownData = Converter::Convert($readmeData);
+        $markdownData = Converter::convert($readmeData);
 
         $markdown = $input->getOption('output');
         if ($markdown) {
