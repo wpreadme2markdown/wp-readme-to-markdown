@@ -3,6 +3,7 @@
  * Converts WordPress-flavored markup from standard readme.txt files
  * to Github-flavored markup for a README.md file
  * @author Benjamin J. Balter -- http://ben.balter.com
+ * @license MIT
  * @version 1.0
  */
 

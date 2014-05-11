@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author Christian Archer <chrstnarchr@aol.com>
+ * @copyright © 2014, Christian Archer
+ * @license MIT
+ */
 
 namespace SunChaser\WP2MD\cli;
 

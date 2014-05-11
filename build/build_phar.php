@@ -1,5 +1,10 @@
 #!/usr/bin/env php
 <?php
+/**
+ * @author Christian Archer <chrstnarchr@aol.com>
+ * @copyright © 2014, Christian Archer
+ * @license MIT
+ */
 
 if (is_file(__DIR__ . '/wp2md.phar')) {
     unlink(__DIR__ . '/wp2md.phar');

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author Christian Archer <chrstnarchr@aol.com>
+ * @copyright © 2014, Christian Archer
+ * @license MIT
+ */
 
 if (is_file(__DIR__ . '/../vendor/autoload.php')) {
     require(__DIR__ . '/../vendor/autoload.php');
