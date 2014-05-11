@@ -21,7 +21,7 @@ CLI:
 PHP:
 
 ```php
-$markdown = \SunChaser\WP2MD\Converter::Convert($readme);
+$markdown = \SunChaser\WP2MD\Converter::convert($readme);
 ```
 
 ## Installation
