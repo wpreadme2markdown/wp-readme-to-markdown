@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "symfony/console": "~2.4.4",
+        "symfony/console": "~2.4",
         "php": ">= 5.3.3"
     },
     "autoload": {

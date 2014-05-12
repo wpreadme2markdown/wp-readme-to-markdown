@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6b68f487215d396f3cb5b2f75ac8ed4d",
+    "hash": "b770f5f07ccef9e4b8f89f3c33861674",
     "packages": [
         {
             "name": "symfony/console",
