@@ -14,7 +14,12 @@ if (is_file(__DIR__ . '/wp2md.phar')) {
 $phar = new Phar(__DIR__ . '/wp2md.phar');
 
 // run cli
+$stub_file = file_get_contents(__DIR__.'/../bin/wp2md.php');
+$version   = trim(`git describe --tags HEAD`);
+$stub_file = preg_replace('/@package_version@/', $version, $stub_file);
+
+$phar->addFromString('bin/wp2md.php', $stub_file);
 $phar->setDefaultStub('bin/wp2md.php');
 
 // add files
-$phar->buildFromDirectory(__DIR__ . '/../','@/(bin|src|vendor)/@');
+$phar->buildFromDirectory(__DIR__ . '/../','@/(src|vendor)/@');

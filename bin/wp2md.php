@@ -17,7 +17,7 @@ if (is_file(__DIR__ . '/../vendor/autoload.php')) {
     );
 }
 
-$application = new \Symfony\Component\Console\Application();
+$application = new \Symfony\Component\Console\Application('WP2MD', '@package_version@');
 $application->add(new \SunChaser\WP2MD\cli\Convert());
 $application->run();
 
