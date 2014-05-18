@@ -40,5 +40,5 @@ The binary will be `vendor/bin/wp2md`
 
 You may install WP2MD binary globally
 
-    sudo wget http://code.sunchaser.info/wp2md/downloads/wp2md.phar /usr/local/bin/wp2md
+    sudo wget http://code.sunchaser.info/wp2md/downloads/wp2md.phar -O /usr/local/bin/wp2md
     sudo chmod a+x /usr/local/bin/wp2md
