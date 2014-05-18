@@ -95,7 +95,7 @@ function find_screenshot( $number, $plugin_slug ) {
 	$extensions = array( 'png', 'jpg', 'jpeg', 'gif' );
 
 	// this seems to now be the correct URL, not s.wordpress.org/plugins
-	$base_url = 'http://s-plugins.wordpress.org/' . $plugin_slug . '/';
+	$base_url = 'http://s.w.org/plugins/' . $plugin_slug . '/';
 	$assets_url = $base_url . 'assets/';
 
 	/* check assets for all extensions first, because if there's a
