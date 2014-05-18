@@ -42,10 +42,16 @@ foreach ( $labels as $label ) {
 	$readme = preg_replace( "|^($label): (.+)$|im", "**$1:** $2  ", $readme );
 }
 
-//guess plugin slug from plugin name
-//@todo better way to do this?
-preg_match( "|^#([^#]+)#*?\s*?\n|im", $readme, $matches );
-$plugin = str_replace( ' ', '-', strtolower( trim( $matches[1] ) ) );
+//look for second argument to script, assume it's the plugin slug
+if ( ! empty( $argv[2] ) ) {
+	$plugin = $argv[2];
+}
+else {
+	//guess plugin slug from plugin name
+	//@todo better way to do this?
+	preg_match( "|^#([^#]+)#*?\s*?\n|im", $readme, $matches );
+	$plugin = str_replace( ' ', '-', strtolower( trim( $matches[1] ) ) );
+}
 
 //process screenshots, if any
 if ( preg_match( "|## Screenshots ##(.*?)## [a-z]+ ##|ism", $readme, $matches ) ) {
