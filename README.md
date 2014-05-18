@@ -34,7 +34,7 @@ Add a composer dependency to your project:
         "sunchaser/wp2md": "*"
     }
 
-The binary will be ```vendor/bin/wp2md```
+The binary will be `vendor/bin/wp2md`
 
 ### Download binary
 

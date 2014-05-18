@@ -3,3 +3,4 @@
 composer.phar
 /build/*.phar
 /vendor/
+/test/

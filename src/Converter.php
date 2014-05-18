@@ -11,7 +11,12 @@ namespace SunChaser\WP2MD;
 
 class Converter
 {
-    public static function convert($readme)
+    /**
+     * @param string $readme plugin readme.txt content
+     * @param string $pluginSlug explicitly set the plugin slug, NULL for autodetect
+     * @return mixed
+     */
+    public static function convert($readme, $pluginSlug = null)
     {
         //Convert Headings
         //original code from https://github.com/markjaquith/WordPress-Plugin-Readme-Parser/blob/master/parse-readme.php
@@ -35,14 +40,16 @@ class Converter
             $readme = preg_replace("|^($label): (.+)$|im", '**$1:** $2  ', $readme);
         }
 
-        //guess plugin slug from plugin name
-        //@todo better way to do this?
-        preg_match('|^#([^#]+)#*?\s*?\n|im', $readme, $matches);
-        $plugin = str_replace(' ', '-', strtolower(trim($matches[1])));
+        if ($pluginSlug !== null) {
+            $plugin = $pluginSlug;
+        } else {
+            //guess plugin slug from plugin name
+            preg_match('|^#([^#]+)#*?\s*?\n|im', $readme, $matches);
+            $plugin = str_replace(' ', '-', strtolower(trim($matches[1])));
+        }
 
         //process screenshots, if any
         if (preg_match('|## Screenshots ##(.*?)## [a-z]+ ##|ism', $readme, $matches)) {
-
             //parse screenshot list into array
             preg_match_all('|^[0-9]+\. (.*)$|im', $matches[1], $screenshots, PREG_SET_ORDER);
 
@@ -81,7 +88,7 @@ class Converter
         $extensions = array('png', 'jpg', 'jpeg', 'gif');
 
         // this seems to now be the correct URL, not s.wordpress.org/plugins
-        $base_url = 'http://s-plugins.wordpress.org/' . $plugin_slug . '/';
+        $base_url = 'https://ps.w.org/' . $plugin_slug . '/';
         $assets_url = $base_url . 'assets/';
 
         /* check assets for all extensions first, because if there's a
