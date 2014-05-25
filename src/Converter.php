@@ -88,8 +88,8 @@ class Converter
         $extensions = array('png', 'jpg', 'jpeg', 'gif');
 
         // this seems to now be the correct URL, not s.wordpress.org/plugins
-        $base_url = 'https://ps.w.org/' . $plugin_slug . '/';
-        $assets_url = $base_url . 'assets/';
+        $base_url   = 'https://s.w.org/plugins/' . $plugin_slug . '/';
+        $assets_url = 'https://ps.w.org/' . $plugin_slug . '/assets/';
 
         /* check assets for all extensions first, because if there's a
            gif in the assets directory and a jpg in the base directory,
