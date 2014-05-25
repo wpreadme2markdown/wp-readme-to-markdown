@@ -42,3 +42,7 @@ You may install WP2MD binary globally
 
     sudo wget http://code.sunchaser.info/wp2md/downloads/wp2md.phar -O /usr/local/bin/wp2md
     sudo chmod a+x /usr/local/bin/wp2md
+
+## Online
+
+Try the online version on [wpreadme2markdown.com](http://wpreadme2markdown.com/)
