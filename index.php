@@ -42,10 +42,16 @@ foreach ( $labels as $label ) {
 	$readme = preg_replace( "|^($label): (.+)$|im", "**$1:** $2  ", $readme );
 }
 
-//guess plugin slug from plugin name
-//@todo better way to do this?
-preg_match( "|^#([^#]+)#*?\s*?\n|im", $readme, $matches );
-$plugin = str_replace( ' ', '-', strtolower( trim( $matches[1] ) ) );
+//look for second argument to script, assume it's the plugin slug
+if ( ! empty( $argv[2] ) ) {
+	$plugin = $argv[2];
+}
+else {
+	//guess plugin slug from plugin name
+	//@todo better way to do this?
+	preg_match( "|^#([^#]+)#*?\s*?\n|im", $readme, $matches );
+	$plugin = str_replace( ' ', '-', strtolower( trim( $matches[1] ) ) );
+}
 
 //process screenshots, if any
 if ( preg_match( "|## Screenshots ##(.*?)## [a-z]+ ##|ism", $readme, $matches ) ) {
@@ -95,8 +101,8 @@ function find_screenshot( $number, $plugin_slug ) {
 	$extensions = array( 'png', 'jpg', 'jpeg', 'gif' );
 
 	// this seems to now be the correct URL, not s.wordpress.org/plugins
-	$base_url = 'http://s-plugins.wordpress.org/' . $plugin_slug . '/';
-	$assets_url = $base_url . 'assets/';
+	$base_url   = 'https://s.w.org/plugins/' . $plugin_slug . '/';
+	$assets_url = 'https://ps.w.org/' . $plugin_slug . '/assets/';
 
 	/* check assets for all extensions first, because if there's a
 	   gif in the assets directory and a jpg in the base directory,
