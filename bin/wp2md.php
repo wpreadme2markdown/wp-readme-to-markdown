@@ -17,7 +17,7 @@ if (is_file(__DIR__ . '/../vendor/autoload.php')) {
     );
 }
 
-$application = new \Symfony\Component\Console\Application('WP2MD', '@package_version@');
+$application = new \Symfony\Component\Console\Application('WPReadme2Markdown', '@package_version@');
 $application->add(new \WPReadme2Markdown\cli\Convert());
 $application->run();
 
