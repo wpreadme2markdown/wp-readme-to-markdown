@@ -19,7 +19,7 @@ class Convert extends Command
     protected function configure()
     {
         $this->setName('convert');
-        $this->setDescription('Convert WordPress Plugin readme file to Markdown');
+        $this->setDescription('Converts WordPress Plugin Readme files to GitHub Flavored Markdown');
 
         $this->addArgument('input',         InputArgument::OPTIONAL,        'WordPress Plugin readme.txt');
         $this->addArgument('output',        InputArgument::OPTIONAL,        'Markdown file');
