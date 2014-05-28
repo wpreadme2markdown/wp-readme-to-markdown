@@ -1,4 +1,4 @@
-# WP2MD
+# WP Readme to Markdown
 
 Convert WordPress Plugin Readme Files to GitHub Flavored Markdown
 
@@ -21,7 +21,7 @@ CLI:
 PHP:
 
 ```php
-$markdown = \SunChaser\WP2MD\Converter::convert($readme);
+$markdown = \WPReadme2Markdown\Converter::convert($readme);
 ```
 
 ## Installation
@@ -31,7 +31,7 @@ $markdown = \SunChaser\WP2MD\Converter::convert($readme);
 Add a composer dependency to your project:
 
     "require-dev": {
-        "sunchaser/wp2md": "*"
+        "wpreadme2markdown/wpreadme2markdown": "*"
     }
 
 The binary will be `vendor/bin/wp2md`

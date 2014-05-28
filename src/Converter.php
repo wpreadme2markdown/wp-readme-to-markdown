@@ -7,7 +7,7 @@
  * @version 1.0
  */
 
-namespace SunChaser\WP2MD;
+namespace WPReadme2Markdown;
 
 class Converter
 {

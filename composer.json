@@ -1,5 +1,5 @@
 {
-    "name": "sunchaser/wp2md",
+    "name": "wpreadme2markdown/wpreadme2markdown",
     "description": "Convert WordPress Plugin readme.txt to Markdown",
     "keywords": [
         "wordpress",
@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SunChaser\\WP2MD\\": "src/"
+            "WPReadme2Markdown\\": "src/"
         }
     },
     "bin": [
