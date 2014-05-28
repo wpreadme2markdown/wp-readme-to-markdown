@@ -1,0 +1,32 @@
+{
+    "name": "wpreadme2markdown/wpreadme2markdown",
+    "description": "Convert WordPress Plugin readme.txt to Markdown",
+    "keywords": [
+        "wordpress",
+        "markdown",
+        "readme",
+        "converter"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Benjamin J. Balter"
+        },
+        {
+            "name": "Christian Archer",
+            "email": "chrstnarchr@aol.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "~2.4",
+        "php": ">= 5.3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "WPReadme2Markdown\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/wp2md"
+    ]
+}
