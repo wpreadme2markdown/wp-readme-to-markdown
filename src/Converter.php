@@ -14,7 +14,7 @@ class Converter
     /**
      * @param string $readme plugin readme.txt content
      * @param string $pluginSlug explicitly set the plugin slug, NULL for autodetect
-     * @return mixed
+     * @return string
      */
     public static function convert($readme, $pluginSlug = null)
     {
@@ -79,7 +79,7 @@ class Converter
      *
      * @param   int $number Screenshot number to look for
      * @param   string $plugin_slug
-     * @return  mixed   Valid screenshot URL or false if none found
+     * @return  string|false   Valid screenshot URL or false if none found
      * @uses    url_validate
      * @link    http://wordpress.org/plugins/about/readme.txt
      */
@@ -95,20 +95,15 @@ class Converter
            gif in the assets directory and a jpg in the base directory,
            the one in the assets directory needs to win.
         */
-        foreach ($extensions as $extension) {
-            $filename = 'screenshot-' . $number . '.' . $extension;
-            if (self::validateUrl($assets_url . $filename)) {
-                return $assets_url . $filename;
+        foreach (array($assets_url, $base_url) as $prefix_url) {
+            foreach ($extensions as $ext) {
+                $url = $prefix_url . 'screenshot-' . $number . '.' . $ext;
+                if (self::validateUrl($url)) {
+                    return $url;
+                }
             }
         }
 
-        /* nothing found in /assets, check the base directory */
-        foreach ($extensions as $extension) {
-            $filename = 'screenshot-' . $number . '.' . $extension;
-            if (self::validateUrl($base_url . $filename)) {
-                return $base_url . $filename;
-            }
-        }
         return false;
     }
 
