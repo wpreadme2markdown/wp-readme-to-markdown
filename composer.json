@@ -21,6 +21,9 @@
         "symfony/console": "~2.4",
         "php": ">= 5.3.3"
     },
+    "require-dev": {
+        "indeyets/pake": "~1.99"
+    },
     "autoload": {
         "psr-4": {
             "WPReadme2Markdown\\": "src/"

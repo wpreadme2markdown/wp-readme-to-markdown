@@ -1,6 +1,6 @@
 *.iml
 *.ipr
 composer.phar
-/build/*.phar
+/build/
 /vendor/
 /test/
