@@ -35,6 +35,8 @@ class Converter
             'Stable tag',
             'License',
             'License URI',
+            'WC requires at least',
+            'WC tested up to',
         );
         foreach ($labels as $label) {
             $readme = preg_replace("|^($label): (.+)$|im", '**$1:** $2  ', $readme);
