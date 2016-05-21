@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "symfony/console": "~2.4",
+        "symfony/console": "~2.4|~3.0",
         "php": ">= 5.3.3"
     },
     "require-dev": {
@@ -28,6 +28,9 @@
         "psr-4": {
             "WPReadme2Markdown\\": "src/"
         }
+    },
+    "scripts": {
+        "pake": "pake"
     },
     "bin": [
         "bin/wp2md"
