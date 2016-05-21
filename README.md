@@ -42,7 +42,7 @@ You may install WP2MD binary globally
 
     sudo wget http://code.sunchaser.info/wp2md/downloads/wp2md.phar -O /usr/local/bin/wp2md
     sudo chmod a+x /usr/local/bin/wp2md
-    
+
 ## PHAR compilation
 
     # install composer
@@ -50,10 +50,10 @@ You may install WP2MD binary globally
     # install dependencies
     php composer.phar install
     # run pake build script
-    vendor/bin/pake phar
-    
-Executable PHAR archive will be created as `build/wp2md.phar` 
+    php composer.phar pake phar
+
+Executable PHAR archive will be created as `build/wp2md.phar`
 
 ## Online
 
-Try the online version on [wpreadme2markdown.com](http://wpreadme2markdown.com/)
+Try the online version on [wp2md.snch.im](https://wp2md.snch.im/)
