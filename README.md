@@ -45,14 +45,16 @@ You may install WP2MD binary globally
 
 ## PHAR compilation
 
-    # install composer
-    curl -sS https://getcomposer.org/installer | php
     # install dependencies
-    php composer.phar install
+    composer install
     # run pake build script
-    php composer.phar pake phar
+    composer pake phar
 
 Executable PHAR archive will be created as `build/wp2md.phar`
+
+* This assumes composer is installed as a package in your operating system.
+  If not, replace `composer` with your composer.phar location
+  (i.e. `php ../phars/composer.phar`)
 
 ## Online
 
