@@ -5,7 +5,7 @@
  * @license MIT
  */
 
-namespace WPReadme2Markdown\cli;
+namespace WPReadme2Markdown\Cli;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
