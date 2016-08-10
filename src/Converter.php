@@ -69,7 +69,7 @@ class Converter
 
         }
 
-        return $readme;
+        return ltrim($readme);
     }
 
     /**
