@@ -51,7 +51,7 @@ class Converter
         }
 
         //process screenshots, if any
-        if (preg_match('|## Screenshots ##(.*?)## [a-z]+ ##|ism', $readme, $matches)) {
+        if (preg_match('|## Screenshots (.*?)## [a-z]+ |ism', $readme, $matches)) {
             //parse screenshot list into array
             preg_match_all('|^[0-9]+\. (.*)$|im', $matches[1], $screenshots, PREG_SET_ORDER);
 
