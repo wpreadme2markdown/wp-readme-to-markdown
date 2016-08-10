@@ -46,7 +46,7 @@ class Converter
             $plugin = $pluginSlug;
         } else {
             //guess plugin slug from plugin name
-            preg_match('|^#([^#]+)#*?\s*?\n|im', $readme, $matches);
+            preg_match('|^#(.*?)$|im', $readme, $matches);
             $plugin = str_replace(' ', '-', strtolower(trim($matches[1])));
         }
 
