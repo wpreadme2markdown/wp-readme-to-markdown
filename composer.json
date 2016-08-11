@@ -22,7 +22,8 @@
         "php": ">= 5.3.3"
     },
     "require-dev": {
-        "indeyets/pake": "~1.99"
+        "indeyets/pake": "~1.99",
+        "secondtruth/phar-compiler": "~1.1"
     },
     "autoload": {
         "psr-4": {
