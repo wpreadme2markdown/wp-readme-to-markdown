@@ -8,6 +8,7 @@
 namespace WPReadme2Markdown\Cli;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -38,8 +39,7 @@ class Convert extends Command
             $readme = realpath($readme);
 
             if (is_file($readme) === false || is_readable($readme) === false) {
-                $output->writeln('<error>You should specify a readable readme file</error>');
-                die();
+                throw new RuntimeException('You should specify a readable readme file');
             }
         }
 
