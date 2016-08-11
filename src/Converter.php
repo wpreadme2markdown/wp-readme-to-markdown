@@ -18,6 +18,9 @@ class Converter
      */
     public static function convert($readme, $pluginSlug = null)
     {
+        // convert line endings from DOS to Unix
+        $readme = str_replace("\r\n", "\n", $readme);
+
         //Convert Headings
         //original code from https://github.com/markjaquith/WordPress-Plugin-Readme-Parser/blob/master/parse-readme.php
         //using here in reverse to go from WP to GitHub style headings
