@@ -1,5 +1,6 @@
 *.iml
 *.ipr
+/.idea/
 composer.phar
 /build/
 /vendor/
