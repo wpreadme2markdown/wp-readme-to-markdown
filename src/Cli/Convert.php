@@ -34,9 +34,13 @@ class Convert extends Command
         $readme = $input->getOption('input') ?: $input->getArgument('input');
         if ($readme === null) {
             $readme = 'php://stdin';
-        } elseif (is_file($readme) === false || is_readable($readme) === false) {
-            $output->writeln('<error>You should specify a readable readme file</error>');
-            die();
+        } else {
+            $readme = realpath($readme);
+
+            if (is_file($readme) === false || is_readable($readme) === false) {
+                $output->writeln('<error>You should specify a readable readme file</error>');
+                die();
+            }
         }
 
         $readmeData = file_get_contents($readme);
