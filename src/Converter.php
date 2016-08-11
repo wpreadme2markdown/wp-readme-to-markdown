@@ -46,12 +46,12 @@ class Converter
             $plugin = $pluginSlug;
         } else {
             //guess plugin slug from plugin name
-            preg_match('|^#([^#]+)#*?\s*?\n|im', $readme, $matches);
+            preg_match('|^#(.*?)$|im', $readme, $matches);
             $plugin = str_replace(' ', '-', strtolower(trim($matches[1])));
         }
 
         //process screenshots, if any
-        if (preg_match('|## Screenshots ##(.*?)## [a-z]+ ##|ism', $readme, $matches)) {
+        if (preg_match('|## Screenshots (.*?)## [a-z]+ |ism', $readme, $matches)) {
             //parse screenshot list into array
             preg_match_all('|^[0-9]+\. (.*)$|im', $matches[1], $screenshots, PREG_SET_ORDER);
 
@@ -69,7 +69,7 @@ class Converter
 
         }
 
-        return $readme;
+        return ltrim($readme);
     }
 
     /**
