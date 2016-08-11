@@ -20,5 +20,3 @@ if (is_file(__DIR__ . '/../vendor/autoload.php')) {
 $application = new \Symfony\Component\Console\Application('WPReadme2Markdown', '@package_version@');
 $application->add(new \WPReadme2Markdown\Cli\Convert());
 $application->run();
-
-__HALT_COMPILER(); // allow project to be used in PHAR
