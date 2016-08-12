@@ -40,7 +40,7 @@ The binary will be `vendor/bin/wp2md`
 
 You may install WP2MD binary globally
 
-    sudo wget https://github.com/wpreadme2markdown/wp-readme-to-markdown/releases/download/2.0.1/wp2md.phar -O /usr/local/bin/wp2md
+    sudo wget https://github.com/wpreadme2markdown/wp-readme-to-markdown/releases/download/2.0.2/wp2md.phar -O /usr/local/bin/wp2md
     sudo chmod a+x /usr/local/bin/wp2md
 
 ## PHAR compilation
