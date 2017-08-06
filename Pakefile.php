@@ -26,7 +26,7 @@ function exec_composer($path)
 
     $composer = trim($composer);
 
-    pake_sh("$composer install --no-dev -o");
+    pake_sh("$composer update --no-dev -o --prefer-lowest");
 
     chdir($prev_dir);
 }
@@ -46,7 +46,6 @@ function run_phar()
 
     // make clean library installation without dev dependencies
     pake_copy(__DIR__ . '/composer.json', $build_dir . '/composer.json');
-    pake_copy(__DIR__ . '/composer.lock', $build_dir . '/composer.lock');
     exec_composer($build_dir);
 
     pake_echo_action('phar', 'set product version');
