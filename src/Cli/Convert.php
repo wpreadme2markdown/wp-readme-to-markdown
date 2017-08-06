@@ -19,7 +19,7 @@ class Convert extends Command
 {
     protected function configure()
     {
-        $this->setName('convert');
+        $this->setName('wp2md');
         $this->setDescription('Converts WordPress Plugin Readme files to GitHub Flavored Markdown');
 
         $this->addArgument('input',         InputArgument::OPTIONAL,        'WordPress Plugin readme.txt');
@@ -54,4 +54,4 @@ class Convert extends Command
             $output->writeln($markdownData, OutputInterface::OUTPUT_RAW);
         }
     }
-} 
+}
