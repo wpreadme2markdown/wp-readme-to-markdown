@@ -58,4 +58,4 @@ Executable PHAR archive will be created as `build/wp2md.phar`
 
 ## Online
 
-Try the online version on [wpreadme2markdown.snch.im](https://wpreadme2markdown.snch.im/)
+Try the online version on [wpreadme2markdown.cf](https://wpreadme2markdown.cf/)
