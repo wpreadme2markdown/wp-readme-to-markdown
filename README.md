@@ -13,9 +13,9 @@ Convert WordPress Plugin Readme Files to GitHub Flavored Markdown
 CLI:
 
     # with files as params
-    wp2md convert -i readme.txt -o README.md
+    wp2md -i readme.txt -o README.md
     # or with unix pipes
-    wp2md convert < readme.txt > README.md
+    wp2md < readme.txt > README.md
 
 
 PHP:
