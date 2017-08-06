@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Christian Archer <chrstnarchr@aol.com>
+ * @author Christian Archer <sunchaser@sunchaser.info>
  * @copyright © 2014, Christian Archer
  * @license MIT
  */
