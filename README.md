@@ -10,16 +10,6 @@ Convert WordPress Plugin Readme Files to GitHub Flavored Markdown
 
 ## Usage
 
-CLI:
-
-    # with files as params
-    wp2md -i readme.txt -o README.md
-    # or with unix pipes
-    wp2md < readme.txt > README.md
-
-
-PHP:
-
 ```php
 $markdown = \WPReadme2Markdown\Converter::convert($readme);
 ```
@@ -34,28 +24,10 @@ Add a composer dependency to your project:
         "wpreadme2markdown/wpreadme2markdown": "*"
     }
 
-The binary will be `vendor/bin/wp2md`
+## CLI Version
 
-### Download binary
-
-You may install WP2MD binary globally
-
-    sudo wget https://github.com/wpreadme2markdown/wp-readme-to-markdown/releases/download/2.0.2/wp2md.phar -O /usr/local/bin/wp2md
-    sudo chmod a+x /usr/local/bin/wp2md
-
-## PHAR compilation
-
-    # install dependencies
-    composer install
-    # run pake build script
-    composer pake phar
-
-Executable PHAR archive will be created as `build/wp2md.phar`
-
-* This assumes composer is installed as a package in your operating system.
-  If not, replace `composer` with php command and your composer.phar location
-  (i.e. `php ../phars/composer.phar`)
+Visit [this GitHub page](https://github.com/wpreadme2markdown/wp2md) for the CLI version
 
 ## Web Version
 
- Visit [this GitHub page](https://github.com/wpreadme2markdown/web) for the web version and a link to its running instance
+Visit [this GitHub page](https://github.com/wpreadme2markdown/web) for the web version and a link to its running instance
