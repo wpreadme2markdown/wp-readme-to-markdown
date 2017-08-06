@@ -56,6 +56,6 @@ Executable PHAR archive will be created as `build/wp2md.phar`
   If not, replace `composer` with php command and your composer.phar location
   (i.e. `php ../phars/composer.phar`)
 
-## Online
+## Web Version
 
-Try the online version on [wpreadme2markdown.cf](https://wpreadme2markdown.cf/)
+ Visit [this GitHub page](https://github.com/wpreadme2markdown/web) for the web version and a link to its running instance
