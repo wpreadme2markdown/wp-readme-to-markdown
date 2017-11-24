@@ -1,5 +1,8 @@
 # WP Readme to Markdown
 
+[![Packagist](https://img.shields.io/packagist/v/wpreadme2markdown/wpreadme2markdown.svg?maxAge=2592000)](https://packagist.org/packages/wpreadme2markdown/wpreadme2markdown)
+[![Code Climate](https://img.shields.io/codeclimate/coverage/github/wpreadme2markdown/wpreadme2markdown.svg?maxAge=2592000)](https://codeclimate.com/github/wpreadme2markdown/wpreadme2markdown/coverage)
+
 Convert WordPress Plugin Readme Files to GitHub Flavored Markdown
 
 ## Features
