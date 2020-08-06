@@ -67,15 +67,20 @@ class Converter
         return $readme;
     }
 
-    private static function convertScreenshots($readme, $pluginSlug)
+    private static function getPluginSlug($readme, $pluginSlug)
     {
         if ($pluginSlug !== null) {
-            $plugin = $pluginSlug;
-        } else {
-            //guess plugin slug from plugin name
-            preg_match('|^#(.*?)$|im', $readme, $matches);
-            $plugin = str_replace(' ', '-', strtolower(trim($matches[1])));
+            return $pluginSlug;
         }
+
+        // guess plugin slug from plugin name
+        preg_match('|^#(.*?)$|im', $readme, $matches);
+        return str_replace(' ', '-', strtolower(trim($matches[1])));
+    }
+
+    private static function convertScreenshots($readme, $pluginSlug)
+    {
+        $plugin = self::getPluginSlug($readme, $pluginSlug);
 
         //process screenshots, if any
         if (preg_match('|## Screenshots (.*?)## [a-z]+ |ism', $readme, $matches)) {
