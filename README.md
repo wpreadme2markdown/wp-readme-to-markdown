@@ -19,13 +19,13 @@ $markdown = \WPReadme2Markdown\Converter::convert($readme);
 
 ## Installation
 
-### Composer (recommended)
+### Composer
 
 Add a composer dependency to your project:
 
-    "require-dev": {
-        "wpreadme2markdown/wpreadme2markdown": "*"
-    }
+```
+composer require wpreadme2markdown/wpreadme2markdown --dev
+```
 
 ## CLI Version
 
