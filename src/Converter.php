@@ -1,4 +1,7 @@
 <?php
+
+namespace WPReadme2Markdown;
+
 /**
  * Converts WordPress-flavored markup from standard readme.txt files
  * to Github-flavored markup for a README.md file
@@ -6,9 +9,6 @@
  * @license MIT
  * @version 1.0
  */
-
-namespace WPReadme2Markdown;
-
 class Converter
 {
     /**
@@ -18,9 +18,22 @@ class Converter
      */
     public static function convert($readme, $pluginSlug = null)
     {
-        // convert line endings from DOS to Unix
-        $readme = str_replace("\r\n", "\n", $readme);
+        $readme = self::normalizeLineEndings($readme);
+        $readme = self::convertHeadings($readme);
+        $readme = self::convertLabels($readme);
+        $readme = self::convertScreenshots($readme, $pluginSlug);
 
+        return ltrim($readme);
+    }
+
+    private static function normalizeLineEndings($readme)
+    {
+        // convert line endings from DOS to Unix
+        return str_replace("\r\n", "\n", $readme);
+    }
+
+    private static function convertHeadings($readme)
+    {
         //Convert Headings
         //original code from https://github.com/markjaquith/WordPress-Plugin-Readme-Parser/blob/master/parse-readme.php
         //using here in reverse to go from WP to GitHub style headings
@@ -28,6 +41,11 @@ class Converter
         $readme = preg_replace('|^==([^=]+)=*?\s*?\n|im', PHP_EOL . '##$1' . PHP_EOL, $readme);
         $readme = preg_replace('|^===([^=]+)=*?\s*?\n|im', PHP_EOL . '#$1' . PHP_EOL, $readme);
 
+        return $readme;
+    }
+
+    private static function convertLabels($readme)
+    {
         //parse contributors, donate link, etc.
         $labels = array(
             'Contributors',
@@ -46,6 +64,11 @@ class Converter
             $readme = preg_replace("|^($label): (.+)$|im", '**$1:** $2  ', $readme);
         }
 
+        return $readme;
+    }
+
+    private static function convertScreenshots($readme, $pluginSlug)
+    {
         if ($pluginSlug !== null) {
             $plugin = $pluginSlug;
         } else {
@@ -70,10 +93,9 @@ class Converter
                 }
                 $i++;
             }
-
         }
 
-        return ltrim($readme);
+        return $readme;
     }
 
     /**
