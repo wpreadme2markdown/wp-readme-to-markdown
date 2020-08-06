@@ -23,20 +23,20 @@ class Converter
         $readme = self::convertLabels($readme);
         $readme = self::convertScreenshots($readme, $pluginSlug);
 
-        return ltrim($readme);
+        return trim($readme) . "\n";
     }
 
     private static function normalizeLineEndings($readme)
     {
-        // convert line endings from DOS to Unix
-        return str_replace("\r\n", "\n", $readme);
+        // normalize line endings to Unix
+        return preg_replace("|\R|u", "\n", $readme);
     }
 
     private static function convertHeadings($readme)
     {
-        //Convert Headings
-        //original code from https://github.com/markjaquith/WordPress-Plugin-Readme-Parser/blob/master/parse-readme.php
-        //using here in reverse to go from WP to GitHub style headings
+        // Convert Headings
+        // original code from https://github.com/markjaquith/WordPress-Plugin-Readme-Parser/blob/master/parse-readme.php
+        // using here in reverse to go from WP to GitHub style headings
         $readme = preg_replace('|^=([^=]+)=*?\s*?\n|im', PHP_EOL . '###$1' . PHP_EOL, $readme);
         $readme = preg_replace('|^==([^=]+)=*?\s*?\n|im', PHP_EOL . '##$1' . PHP_EOL, $readme);
         $readme = preg_replace('|^===([^=]+)=*?\s*?\n|im', PHP_EOL . '#$1' . PHP_EOL, $readme);
@@ -61,7 +61,7 @@ class Converter
             'WC tested up to',
         );
         foreach ($labels as $label) {
-            $readme = preg_replace("|^($label): (.+)$|im", '**$1:** $2  ', $readme);
+            $readme = preg_replace("|^($label): (.+)$|im", '**$1:** $2 \\', $readme);
         }
 
         return $readme;
