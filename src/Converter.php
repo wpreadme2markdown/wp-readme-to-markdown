@@ -112,9 +112,9 @@ class Converter
             foreach ($screenshots as $screenshot) {
                 $screenshot_url = self::findScreenshot($i, $plugin);
                 if ($screenshot_url) {
-                    $readme = str_replace($screenshot[0], "### {$i}. {$screenshot[1]}\n![{$screenshot[1]}](" . $screenshot_url . ")\n", $readme);
+                    $readme = str_replace($screenshot[0], "### {$i}. {$screenshot[1]}\n\n![{$screenshot[1]}](" . $screenshot_url . ")\n", $readme);
                 } else {
-                    $readme = str_replace($screenshot[0], "### {$i}. {$screenshot[1]}\n[missing image]\n", $readme);
+                    $readme = str_replace($screenshot[0], "### {$i}. {$screenshot[1]}\n\n[missing image]\n", $readme);
                 }
                 $i++;
             }
