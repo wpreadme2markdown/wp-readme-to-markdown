@@ -37,15 +37,30 @@ class Converter
         // Convert Headings
         // original code from https://github.com/markjaquith/WordPress-Plugin-Readme-Parser/blob/master/parse-readme.php
         // using here in reverse to go from WP to GitHub style headings
-        $readme = preg_replace('|^=([^=]+)=*?\s*?\n|im', PHP_EOL . '###$1' . PHP_EOL, $readme);
-        $readme = preg_replace('|^==([^=]+)=*?\s*?\n|im', PHP_EOL . '##$1' . PHP_EOL, $readme);
-        $readme = preg_replace('|^===([^=]+)=*?\s*?\n|im', PHP_EOL . '#$1' . PHP_EOL, $readme);
+        $readme = preg_replace('|\n*===\s*([^=]+?)\s*=*\s*\n+|im', PHP_EOL . "\n# $1\n" . PHP_EOL, $readme);
+        $readme = preg_replace('|\n*==\s*([^=]+?)\s*=*\s*\n+|im', PHP_EOL . "\n## $1\n" . PHP_EOL, $readme);
+        $readme = preg_replace('|\n*=\s*([^=]+?)\s*=*\s*\n+|im', PHP_EOL . "\n### $1\n" . PHP_EOL, $readme);
 
         return $readme;
     }
 
+    private static function generateUniquePattern($readme)
+    {
+        for ($i = 0; $i < 5; $i++) {
+            $uniquePattern = uniqid('@#:');
+
+            if (strpos($readme, $uniquePattern) === false) {
+                return $uniquePattern;
+            }
+        }
+
+        throw new \RuntimeException('Something wrong with randomness');
+    }
+
     private static function convertLabels($readme)
     {
+        $uniquePattern = self::generateUniquePattern($readme);
+
         //parse contributors, donate link, etc.
         $labels = array(
             'Contributors',
@@ -61,8 +76,13 @@ class Converter
             'WC tested up to',
         );
         foreach ($labels as $label) {
-            $readme = preg_replace("|^($label): (.+)$|im", '**$1:** $2 \\', $readme);
+            $readme = preg_replace("|^($label): (.+)$|im", $uniquePattern . '**$1:** $2' . $uniquePattern, $readme);
         }
+
+        // replace all middle occurrences with <br>
+        $readme = str_replace($uniquePattern . "\n" . $uniquePattern, " \\\n", $readme);
+        // remove start and end markers
+        $readme = str_replace($uniquePattern, '', $readme);
 
         return $readme;
     }
@@ -83,7 +103,7 @@ class Converter
         $plugin = self::getPluginSlug($readme, $pluginSlug);
 
         //process screenshots, if any
-        if (preg_match('|## Screenshots (.*?)## [a-z]+ |ism', $readme, $matches)) {
+        if (preg_match('|## Screenshots\n(.*?)\n## [a-z]+|ism', $readme, $matches)) {
             //parse screenshot list into array
             preg_match_all('|^[0-9]+\. (.*)$|im', $matches[1], $screenshots, PREG_SET_ORDER);
 
