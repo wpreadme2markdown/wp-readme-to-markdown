@@ -96,7 +96,7 @@ final class Converter
         return $readme;
     }
 
-    private static function getPluginSlug(string $readme, string $pluginSlug): string
+    private static function getPluginSlug(string $readme, ?string $pluginSlug): string
     {
         if ($pluginSlug !== null) {
             return $pluginSlug;
@@ -107,7 +107,7 @@ final class Converter
         return str_replace(' ', '-', strtolower(trim($matches[1])));
     }
 
-    private static function convertScreenshots(string $readme, string $pluginSlug): string
+    private static function convertScreenshots(string $readme, ?string $pluginSlug): string
     {
         $plugin = self::getPluginSlug($readme, $pluginSlug);
 
