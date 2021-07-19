@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.1
+
+* Fixed crash when plugin slug is null
+
 ## 4.0.0
 
 * Dropped support for PHP earlier than 7.2
