@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WPReadme2Markdown;
 
 /**
@@ -9,14 +11,16 @@ namespace WPReadme2Markdown;
  * @license MIT
  * @version 1.0
  */
-class Converter
+final class Converter
 {
+    private function __construct() {}
+
     /**
      * @param string $readme plugin readme.txt content
-     * @param string $pluginSlug explicitly set the plugin slug, NULL for autodetect
+     * @param string|null $pluginSlug explicitly set the plugin slug, NULL for autodetect
      * @return string
      */
-    public static function convert($readme, $pluginSlug = null)
+    public static function convert(string $readme, ?string $pluginSlug = null): string
     {
         $readme = self::normalizeLineEndings($readme);
         $readme = self::convertHeadings($readme);
@@ -26,13 +30,13 @@ class Converter
         return trim($readme) . "\n";
     }
 
-    private static function normalizeLineEndings($readme)
+    private static function normalizeLineEndings(string $readme): string
     {
         // normalize line endings to Unix
         return preg_replace("|\R|u", "\n", $readme);
     }
 
-    private static function convertHeadings($readme)
+    private static function convertHeadings(string $readme): string
     {
         // Convert Headings
         // original code from https://github.com/markjaquith/WordPress-Plugin-Readme-Parser/blob/master/parse-readme.php
@@ -44,7 +48,7 @@ class Converter
         return $readme;
     }
 
-    private static function generateUniquePattern($readme)
+    private static function generateUniquePattern(string $readme): string
     {
         for ($i = 0; $i < 5; $i++) {
             $uniquePattern = uniqid('@#:');
@@ -57,12 +61,12 @@ class Converter
         throw new \RuntimeException('Something wrong with randomness');
     }
 
-    private static function convertLabels($readme)
+    private static function convertLabels(string $readme): string
     {
         $uniquePattern = self::generateUniquePattern($readme);
 
         //parse contributors, donate link, etc.
-        $labels = array(
+        $labels = [
             'Contributors',
             'Donate link',
             'Tags',
@@ -74,7 +78,7 @@ class Converter
             'License URI',
             'WC requires at least',
             'WC tested up to',
-        );
+        ];
         foreach ($labels as $label) {
             $readme = preg_replace("|^($label): (.+)$|im", $uniquePattern . '**$1:** $2' . $uniquePattern, $readme);
         }
@@ -87,7 +91,7 @@ class Converter
         return $readme;
     }
 
-    private static function getPluginSlug($readme, $pluginSlug)
+    private static function getPluginSlug(string $readme, string $pluginSlug): string
     {
         if ($pluginSlug !== null) {
             return $pluginSlug;
@@ -98,7 +102,7 @@ class Converter
         return str_replace(' ', '-', strtolower(trim($matches[1])));
     }
 
-    private static function convertScreenshots($readme, $pluginSlug)
+    private static function convertScreenshots(string $readme, string $pluginSlug): string
     {
         $plugin = self::getPluginSlug($readme, $pluginSlug);
 
@@ -136,9 +140,9 @@ class Converter
      * @uses    url_validate
      * @link    http://wordpress.org/plugins/about/readme.txt
      */
-    private static function findScreenshot($number, $plugin_slug)
+    private static function findScreenshot(int $number, string $plugin_slug)
     {
-        $extensions = array('png', 'jpg', 'jpeg', 'gif');
+        $extensions = ['png', 'jpg', 'jpeg', 'gif'];
 
         // this seems to now be the correct URL, not s.wordpress.org/plugins
         $base_url   = 'https://s.w.org/plugins/' . $plugin_slug . '/';
@@ -148,7 +152,7 @@ class Converter
            gif in the assets directory and a jpg in the base directory,
            the one in the assets directory needs to win.
         */
-        foreach (array($assets_url, $base_url) as $prefix_url) {
+        foreach ([$assets_url, $base_url] as $prefix_url) {
             foreach ($extensions as $ext) {
                 $url = $prefix_url . 'screenshot-' . $number . '.' . $ext;
                 if (self::validateUrl($url)) {
@@ -172,7 +176,7 @@ class Converter
      * @return   boolean
      * @link http://www.php.net/manual/en/function.fsockopen.php#39948
      */
-    private static function validateUrl($link)
+    private static function validateUrl(string $link): bool
     {
         $url_parts = @parse_url($link);
 
