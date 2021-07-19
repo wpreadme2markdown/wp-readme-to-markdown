@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0.0
+
+* Dropped support for PHP earlier than 7.2
+* Fixed screenshot discovery [#27]
+
 ## 3.1.0
 
 * Normalized and upgraded generated markdown
