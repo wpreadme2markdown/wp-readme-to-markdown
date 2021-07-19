@@ -118,10 +118,11 @@ final class Converter
 
             //replace list item with markdown image syntax, hotlinking to plugin repo
             $i = 1;
+            $lastPrefix = $lastExtension = null;
             foreach ($screenshots as $screenshot) {
-                $screenshot_url = self::findScreenshot($i, $plugin);
-                if ($screenshot_url) {
-                    $readme = str_replace($screenshot[0], "### {$i}. {$screenshot[1]}\n\n![{$screenshot[1]}](" . $screenshot_url . ")\n", $readme);
+                [$screenshotUrl, $lastPrefix, $lastExtension] = self::findScreenshot($i, $plugin, $lastPrefix, $lastExtension);
+                if ($screenshotUrl) {
+                    $readme = str_replace($screenshot[0], "### {$i}. {$screenshot[1]}\n\n![{$screenshot[1]}](" . $screenshotUrl . ")\n", $readme);
                 } else {
                     $readme = str_replace($screenshot[0], "### {$i}. {$screenshot[1]}\n\n[missing image]\n", $readme);
                 }
@@ -139,29 +140,45 @@ final class Converter
      * of: (png|jpg|jpeg|gif).  We look in the /assets directory first,
      * then in the base directory.
      *
-     * @param   int $number Screenshot number to look for
-     * @param   string $plugin_slug
-     * @return  string|false   Valid screenshot URL or false if none found
-     * @uses    url_validate
-     * @link    http://wordpress.org/plugins/about/readme.txt
+     * @param int $number Screenshot number to look for
+     * @param string $pluginSlug
+     * @param string|null $lastPrefix
+     * @param string|null $lastExtension
+     * @return array|false   Valid screenshot URL + optimization data or false if none found
+     * @uses url_validate
+     * @link http://wordpress.org/plugins/about/readme.txt
      */
-    private static function findScreenshot(int $number, string $plugin_slug)
-    {
+    private static function findScreenshot(
+        int $number,
+        string $pluginSlug,
+        ?string $lastPrefix,
+        ?string $lastExtension
+    ) {
         $extensions = ['png', 'jpg', 'jpeg', 'gif'];
 
         // this seems to now be the correct URL, not s.wordpress.org/plugins
-        $base_url   = 'https://s.w.org/plugins/' . $plugin_slug . '/';
-        $assets_url = 'https://ps.w.org/' . $plugin_slug . '/assets/';
+        $baseUrl   = 'https://s.w.org/plugins/' . $pluginSlug . '/';
+        $assetsUrl = 'https://ps.w.org/' . $pluginSlug . '/assets/';
+
+        $prefixes = [$assetsUrl, $baseUrl];
+
+        if ($lastPrefix) {
+            $prefixes = array_unique(array_merge([$lastPrefix], $prefixes));
+        }
+
+        if ($lastExtension) {
+            $extensions = array_unique(array_merge([$lastExtension], $extensions));
+        }
 
         /* check assets for all extensions first, because if there's a
            gif in the assets directory and a jpg in the base directory,
            the one in the assets directory needs to win.
         */
-        foreach ([$assets_url, $base_url] as $prefix_url) {
+        foreach ($prefixes as $prefixUrl) {
             foreach ($extensions as $ext) {
-                $url = $prefix_url . 'screenshot-' . $number . '.' . $ext;
+                $url = $prefixUrl . 'screenshot-' . $number . '.' . $ext;
                 if (self::validateUrl($url)) {
-                    return $url;
+                    return [$url, $prefixUrl, $ext];
                 }
             }
         }
