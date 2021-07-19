@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace WPReadme2Markdown;
 
+use GuzzleHttp\Client;
+
 /**
  * Converts WordPress-flavored markup from standard readme.txt files
  * to Github-flavored markup for a README.md file
@@ -13,6 +15,9 @@ namespace WPReadme2Markdown;
  */
 final class Converter
 {
+    /** @var Client */
+    private static $client = null;
+
     private function __construct() {}
 
     /**
@@ -178,43 +183,12 @@ final class Converter
      */
     private static function validateUrl(string $link): bool
     {
-        $url_parts = @parse_url($link);
-
-        if (empty($url_parts['host'])) {
-            return false;
-        }
-        $host = $url_parts['host'];
-
-        if (!empty($url_parts['path'])) {
-            $documentpath = $url_parts['path'];
-        } else {
-            $documentpath = '/';
+        if (self::$client ===  null) {
+            self::$client = new Client(['http_errors' => false]);
         }
 
-        if (!empty($url_parts['query'])) {
-            $documentpath .= '?' . $url_parts['query'];
-        }
+        $response = self::$client->request('HEAD', $link);
 
-        if (!empty($url_parts['port'])) {
-            $port = $url_parts['port'];
-        } else {
-            $port = '80';
-        }
-
-        $socket = @fsockopen($host, $port, $errno, $errstr, 30);
-
-        if (!$socket) {
-            return false;
-        } else {
-            fwrite($socket, "HEAD " . $documentpath . " HTTP/1.0\r\nHost: $host\r\n\r\n");
-            $http_response = fgets($socket, 22);
-
-            if (preg_match('/200 OK/', $http_response, $regs)) {
-                fclose($socket);
-                return true;
-            } else {
-                return false;
-            }
-        }
+        return $response->getStatusCode() === 200;
     }
 }
