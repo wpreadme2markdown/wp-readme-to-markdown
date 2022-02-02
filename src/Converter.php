@@ -46,9 +46,9 @@ final class Converter
         // Convert Headings
         // original code from https://github.com/markjaquith/WordPress-Plugin-Readme-Parser/blob/master/parse-readme.php
         // using here in reverse to go from WP to GitHub style headings
-        $readme = preg_replace('|\n*===\s*([^=]+?)\s*=*\s*\n+|im', PHP_EOL . "\n# $1\n" . PHP_EOL, $readme);
-        $readme = preg_replace('|\n*==\s*([^=]+?)\s*=*\s*\n+|im', PHP_EOL . "\n## $1\n" . PHP_EOL, $readme);
-        $readme = preg_replace('|\n*=\s*([^=]+?)\s*=*\s*\n+|im', PHP_EOL . "\n### $1\n" . PHP_EOL, $readme);
+        $readme = preg_replace('|\n===\s*([^=]+?)\s*=*\s*\n+|im', PHP_EOL . "\n# $1\n" . PHP_EOL, $readme);
+        $readme = preg_replace('|\n==\s*([^=]+?)\s*=*\s*\n+|im', PHP_EOL . "\n## $1\n" . PHP_EOL, $readme);
+        $readme = preg_replace('|\n=\s*([^=]+?)\s*=*\s*\n+|im', PHP_EOL . "\n### $1\n" . PHP_EOL, $readme);
 
         return $readme;
     }
