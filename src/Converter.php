@@ -81,6 +81,8 @@ final class Converter
             'Stable tag',
             'License',
             'License URI',
+            'Author',
+            'Author URI',
             'WC requires at least',
             'WC tested up to',
         ];
