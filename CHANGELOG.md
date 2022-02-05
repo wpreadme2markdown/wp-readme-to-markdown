@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0.2
+
+* Fixed equal sign becoming a header when not in the beginning of the line [#28]
+  (by [@msaari], [@evrpress])
+
 ## 4.0.1
 
 * Fixed crash when plugin slug is null
@@ -38,7 +43,7 @@
 * CLI tool now allows using Symfony 3 console
 * Fixed incorrect header conversion after some lists
 
-Note: published wp2md.phar now requres PHP >= 5.5.9. However you still can compile your phar with PHP >= 5.3.3 if required
+Note: published wp2md.phar now requires PHP >= 5.5.9, however you still can compile your phar with PHP >= 5.3.3 if required.
 
 ## 2.0.0
 
@@ -49,3 +54,8 @@ As namespace and package name changed, mark it as a new major version
 [@florianbrinkmann]: https://github.com/florianbrinkmann
 [@inderpreet99]: https://github.com/inderpreet99
 [@jamesgol]: https://github.com/jamesgol
+[@msaari]: https://github.com/msaari
+[@evrpress]: https://github.com/evrpress
+
+[#27]: https://github.com/wpreadme2markdown/wp-readme-to-markdown/issues/27
+[#28]: https://github.com/wpreadme2markdown/wp-readme-to-markdown/issues/28
