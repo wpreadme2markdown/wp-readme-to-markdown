@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.3
+
+* Fixed first header not being converted since 4.0.2
+
 ## 4.0.2
 
 * Fixed equal sign becoming a header when not in the beginning of the line [#28]
