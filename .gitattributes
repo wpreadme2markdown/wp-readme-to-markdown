@@ -1,2 +1,3 @@
-/.git*  export-ignore
-/*.xml  export-ignore
+/.git*          export-ignore
+/*.xml          export-ignore
+/CHANGELOG.md   export-ignore
