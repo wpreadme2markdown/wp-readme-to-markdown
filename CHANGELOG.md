@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.1.0
+
+* Added an option to skip the image check [#32]
+  (by [@LC43])
+
 ## 4.0.3
 
 * Fixed first header not being converted since 4.0.2
@@ -60,6 +65,8 @@ As namespace and package name changed, mark it as a new major version
 [@jamesgol]: https://github.com/jamesgol
 [@msaari]: https://github.com/msaari
 [@evrpress]: https://github.com/evrpress
+[@LC43]: https://github.com/LC43
 
 [#27]: https://github.com/wpreadme2markdown/wp-readme-to-markdown/issues/27
 [#28]: https://github.com/wpreadme2markdown/wp-readme-to-markdown/issues/28
+[#32]: https://github.com/wpreadme2markdown/wp-readme-to-markdown/pull/32
