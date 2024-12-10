@@ -18,19 +18,21 @@ final class Converter
     /** @var Client */
     private static $client = null;
 
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * @param string $readme plugin readme.txt content
      * @param string|null $pluginSlug explicitly set the plugin slug, NULL for autodetect
      * @return string
      */
-    public static function convert(string $readme, ?string $pluginSlug = null, ?bool $imageCheck = true ): string
+    public static function convert(string $readme, ?string $pluginSlug = null, ?bool $imageCheck = true): string
     {
         $readme = self::normalizeLineEndings($readme);
         $readme = self::convertHeadings($readme);
         $readme = self::convertLabels($readme);
-        $readme = self::convertScreenshots($readme, $pluginSlug, $imageCheck );
+        $readme = self::convertScreenshots($readme, $pluginSlug, $imageCheck);
 
         return trim($readme) . "\n";
     }
@@ -107,7 +109,7 @@ final class Converter
         return str_replace(' ', '-', strtolower(trim($matches[1])));
     }
 
-    private static function convertScreenshots(string $readme, ?string $pluginSlug, bool $imageCheck ): string
+    private static function convertScreenshots(string $readme, ?string $pluginSlug, bool $imageCheck): string
     {
         $plugin = self::getPluginSlug($readme, $pluginSlug);
 
@@ -120,9 +122,14 @@ final class Converter
             $i = 1;
             $lastPrefix = $lastExtension = null;
             foreach ($screenshots as $screenshot) {
-                [$screenshotUrl, $lastPrefix, $lastExtension] = self::findScreenshot($i, $plugin, $lastPrefix, $lastExtension, $imageCheck );
+                [$screenshotUrl, $lastPrefix, $lastExtension] =
+                    self::findScreenshot($i, $plugin, $lastPrefix, $lastExtension, $imageCheck);
                 if ($screenshotUrl) {
-                    $readme = str_replace($screenshot[0], "### {$i}. {$screenshot[1]}\n\n![{$screenshot[1]}](" . $screenshotUrl . ")\n", $readme);
+                    $readme = str_replace(
+                        $screenshot[0],
+                        "### {$i}. {$screenshot[1]}\n\n![{$screenshot[1]}](" . $screenshotUrl . ")\n",
+                        $readme
+                    );
                 } else {
                     $readme = str_replace($screenshot[0], "### {$i}. {$screenshot[1]}\n\n[missing image]\n", $readme);
                 }
