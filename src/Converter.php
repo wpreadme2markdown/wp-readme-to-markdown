@@ -186,10 +186,9 @@ final class Converter
             foreach ($extensions as $ext) {
                 $url = $prefixUrl . 'screenshot-' . $number . '.' . $ext;
 
-                if ($imageCheck && ! self::validateUrl($url)) {
-                    return false;
+                if (!$imageCheck || self::validateUrl($url)) {
+                    return [$url, $prefixUrl, $ext];
                 }
-                return [$url, $prefixUrl, $ext];
             }
         }
 
