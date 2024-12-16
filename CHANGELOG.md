@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.1
+
+* Fixed image detection broken by [#32]
+
 ## 4.1.0
 
 * Added an option to skip the image check [#32]
