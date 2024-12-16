@@ -2,7 +2,7 @@
 
 ## 4.1.1
 
-* Fixed image detection broken by [#32]
+* Fixed image detection broken by [#32], [wp2md#5]
 
 ## 4.1.0
 
@@ -74,3 +74,5 @@ As namespace and package name changed, mark it as a new major version
 [#27]: https://github.com/wpreadme2markdown/wp-readme-to-markdown/issues/27
 [#28]: https://github.com/wpreadme2markdown/wp-readme-to-markdown/issues/28
 [#32]: https://github.com/wpreadme2markdown/wp-readme-to-markdown/pull/32
+
+[wp2md#5]: https://github.com/wpreadme2markdown/wp2md/issues/5
