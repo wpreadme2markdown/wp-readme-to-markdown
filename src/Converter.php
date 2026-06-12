@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace WPReadme2Markdown;
 
-use GuzzleHttp\Client;
+use Http\Discovery\Psr18Client;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
 
 /**
  * Converts WordPress-flavored markup from standard readme.txt files
@@ -15,8 +17,7 @@ use GuzzleHttp\Client;
  */
 final class Converter
 {
-    /** @var Client */
-    private static $client = null;
+    private static ClientInterface $client;
 
     private function __construct()
     {
@@ -25,7 +26,6 @@ final class Converter
     /**
      * @param string $readme plugin readme.txt content
      * @param string|null $pluginSlug explicitly set the plugin slug, NULL for autodetect
-     * @return string
      */
     public static function convert(string $readme, ?string $pluginSlug = null, ?bool $imageCheck = true): string
     {
@@ -60,7 +60,7 @@ final class Converter
         for ($i = 0; $i < 5; $i++) {
             $uniquePattern = uniqid('@#:');
 
-            if (strpos($readme, $uniquePattern) === false) {
+            if (!str_contains($readme, $uniquePattern)) {
                 return $uniquePattern;
             }
         }
@@ -122,9 +122,9 @@ final class Converter
             $i = 1;
             $lastPrefix = $lastExtension = null;
             foreach ($screenshots as $screenshot) {
-                [$screenshotUrl, $lastPrefix, $lastExtension] =
-                    self::findScreenshot($i, $plugin, $lastPrefix, $lastExtension, $imageCheck);
-                if ($screenshotUrl) {
+                $found = self::findScreenshot($i, $plugin, $lastPrefix, $lastExtension, $imageCheck);
+                if ($found) {
+                    [$screenshotUrl, $lastPrefix, $lastExtension] = $found;
                     $readme = str_replace(
                         $screenshot[0],
                         "### {$i}. {$screenshot[1]}\n\n![{$screenshot[1]}](" . $screenshotUrl . ")\n",
@@ -148,11 +148,8 @@ final class Converter
      * then in the base directory.
      *
      * @param int $number Screenshot number to look for
-     * @param string $pluginSlug
-     * @param string|null $lastPrefix
-     * @param string|null $lastExtension
-     * @return array|false   Valid screenshot URL + optimization data or false if none found
-     * @uses url_validate
+     * @return array{0: string, 1: string, 2: string}|false
+     *      Valid screenshot URL + optimization data or false if none found
      * @link http://wordpress.org/plugins/about/readme.txt
      */
     private static function findScreenshot(
@@ -161,7 +158,7 @@ final class Converter
         ?string $lastPrefix,
         ?string $lastExtension,
         bool $imageCheck
-    ) {
+    ): array|false {
         $extensions = ['png', 'jpg', 'jpeg', 'gif'];
 
         // this seems to now be the correct URL, not s.wordpress.org/plugins
@@ -209,11 +206,13 @@ final class Converter
      */
     private static function validateUrl(string $link): bool
     {
-        if (self::$client ===  null) {
-            self::$client = new Client(['http_errors' => false]);
-        }
+        self::$client ??= new Psr18Client();
 
-        $response = self::$client->request('HEAD', $link);
+        try {
+            $response = self::$client->sendRequest(self::$client->createRequest('HEAD', $link));
+        } catch (ClientExceptionInterface) {
+            return false;
+        }
 
         return $response->getStatusCode() === 200;
     }
