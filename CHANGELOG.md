@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.0
+
+* Drop strict dependency on Guzzle
+* Types everywhere
+* Require PHP 8.0
+
 ## 4.1.1
 
 * Fixed image detection broken by [#32], [wp2md#5]
