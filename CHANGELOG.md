@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.0.0
+
+* BREAKING CHANGE: new signature for ```\WPReadme2Markdown\Converter::convert()```
+  * ``skipScreenshots`` skip the screenshot section entirely (default)
+  * ``imageExtension``
+    * if ``imageCheck === true`` the only extension to check
+    * if ``imageCheck === false`` the extension to be used for screenshot urls
+  * ``imageCheck``: moved to be the 5th parameter, default changed to false
+
 ## 5.0.0
 
 * Drop strict dependency on Guzzle

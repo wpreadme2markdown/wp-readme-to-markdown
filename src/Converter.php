@@ -27,12 +27,21 @@ final class Converter
      * @param string $readme plugin readme.txt content
      * @param string|null $pluginSlug explicitly set the plugin slug, NULL for autodetect
      */
-    public static function convert(string $readme, ?string $pluginSlug = null, ?bool $imageCheck = true): string
-    {
+    public static function convert(
+        string $readme,
+        ?string $pluginSlug = null,
+        bool $skipScreenshots = true,
+        ?string $imageExtension = null,
+        bool $imageCheck = false
+    ): string {
         $readme = self::normalizeLineEndings($readme);
         $readme = self::convertHeadings($readme);
         $readme = self::convertLabels($readme);
-        $readme = self::convertScreenshots($readme, $pluginSlug, $imageCheck);
+        if ($skipScreenshots) {
+            $readme = self::skipScreenshots($readme);
+        } else {
+            $readme = self::convertScreenshots($readme, $pluginSlug, $imageCheck, $imageExtension);
+        }
 
         return trim($readme) . "\n";
     }
@@ -109,8 +118,17 @@ final class Converter
         return str_replace(' ', '-', strtolower(trim($matches[1])));
     }
 
-    private static function convertScreenshots(string $readme, ?string $pluginSlug, bool $imageCheck): string
+    private static function skipScreenshots(string $readme): string
     {
+        return preg_replace('|## Screenshots\n.*?\n(## [a-z]+)|ism', '$1', $readme);
+    }
+
+    private static function convertScreenshots(
+        string $readme,
+        ?string $pluginSlug,
+        bool $imageCheck,
+        ?string $imageExtension
+    ): string {
         $plugin = self::getPluginSlug($readme, $pluginSlug);
 
         //process screenshots, if any
@@ -122,7 +140,7 @@ final class Converter
             $i = 1;
             $lastPrefix = $lastExtension = null;
             foreach ($screenshots as $screenshot) {
-                $found = self::findScreenshot($i, $plugin, $lastPrefix, $lastExtension, $imageCheck);
+                $found = self::findScreenshot($i, $plugin, $lastPrefix, $lastExtension, $imageCheck, $imageExtension);
                 if ($found) {
                     [$screenshotUrl, $lastPrefix, $lastExtension] = $found;
                     $readme = str_replace(
@@ -157,9 +175,10 @@ final class Converter
         string $pluginSlug,
         ?string $lastPrefix,
         ?string $lastExtension,
-        bool $imageCheck
+        bool $imageCheck,
+        ?string $imageExtension
     ): array|false {
-        $extensions = ['png', 'jpg', 'jpeg', 'gif'];
+        $extensions = $imageExtension === null ? ['png', 'jpg', 'jpeg', 'gif'] : [$imageExtension];
 
         // this seems to now be the correct URL, not s.wordpress.org/plugins
         $baseUrl   = 'https://s.w.org/plugins/' . $pluginSlug . '/';
